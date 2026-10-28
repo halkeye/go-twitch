@@ -856,6 +856,27 @@ type ExtensionBitsProductCost struct {
 	Type string `json:"type"`
 }
 
+// EventSubCondition is a representation the conditions for a Twitch EventSub subscription.
+// see https://dev.twitch.tv/docs/eventsub/eventsub-reference#conditions
+type EventSubCondition struct {
+	// BroadcasterUserID is the User ID of the broadcaster (channel).
+	BroadcasterUserID string `json:"broadcaster_user_id"`
+	// FromBroadcasterUserID is the broadcaster user ID that created the channel raid you want to get notifications for. Use this parameter if you want to know when a specific broadcaster raids another broadcaster. The channel raid condition must include either from_broadcaster_user_id or to_broadcaster_user_id.
+	FromBroadcasterUserID string `json:"from_broadcaster_user_id"`
+	// ModeratorUserID is the User ID of the moderator.
+	ModeratorUserID string `json:"moderator_user_id"`
+	// ToBroadcasterUserID is the broadcaster user ID that received the channel raid you want to get notifications for. Use this parameter if you want to know when a specific broadcaster is raided by another broadcaster. The channel raid condition must include either from_broadcaster_user_id or to_broadcaster_user_id.
+	ToBroadcasterUserID string `json:"to_broadcaster_user_id"`
+	// RewardID is to Specify a reward id to only receive notifications for a specific reward.
+	RewardID string `json:"reward_id"`
+	// ClientID is Your application’s client id. The provided client_id must match the client ID in the application access token.
+	ClientID string `json:"client_id"`
+	// ExtensionClientID is the client ID of the extension.
+	ExtensionClientID string `json:"extension_client_id"`
+	// UserID is the user id
+	UserID string `json:"user_id"`
+}
+
 // EventSubSubscription represents a Twitch EventSub subscription.
 type EventSubSubscription struct {
 	// ID is the ID that uniquely identifies the subscription.
@@ -890,6 +911,8 @@ type EventSubTransport struct {
 	SessionID string `json:"session_id,omitempty"`
 	// ConduitID is the ID of the conduit being used for an EventSub transport.
 	ConduitID string `json:"conduit_id,omitempty"`
+	// Secret is the secret to  verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. Specify this field only if method is set to webhook
+	Secret string `json:"secret,omitempty"`
 }
 
 // Game represents a game on Twitch.
